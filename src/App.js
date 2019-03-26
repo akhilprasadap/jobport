@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+class Login extends Component {
+
+    btnclick = () => {
+        axios.post("https://reqres.in/api/login", {
+                email: this.refs.email.value,
+                password: this.refs.pwd.value
+            })
+            .then(function(response) {
+                console.log(response);
+            })
+            .catch(function(error) {
+                console.log(error);
+            })
+    }
+
+    render() {
+        return (
+            <div className="main">
+        <div id="login">
+          <p>LOGIN</p>
+          <input type="email" id="mail" ref="email" placeholder="Enter Email"/>
+          <br/>
+          <input type="password" id="pwd" ref="pwd" placeholder="Enter Password"/>
+          <br/><br/>
+          <button onClick={this.btnclick}>Login</button>
+        </div>
       </div>
-    );
-  }
+        );
+    }
 }
 
-export default App;
+export default Login;
